@@ -2,12 +2,10 @@ const express = require('express');
 const productsRoutes = require('./routes/products');
 const cartsRoutes = require('./routes/carts');
 
-const app = express();
-app.use(express.json());
+// server.js
+const app = require('./app'); // Importar la configuración desde app.js
 
-app.use('/api/products', productsRoutes);
-app.use('/api/carts', cartsRoutes);
-
+// Levantar el servidor en el puerto 8080
 const PORT = 8080;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
