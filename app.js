@@ -1,11 +1,9 @@
-// app.js
 const express = require('express');
 const app = express();
 
-// Middlewares
+
 app.use(express.json());
 
-// Rutas
 const productsRoutes = require('./routes/products');
 const cartsRoutes = require('./routes/carts');
 
