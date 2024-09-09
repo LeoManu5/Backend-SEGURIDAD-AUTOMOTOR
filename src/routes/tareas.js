@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { v4: uuidv4 } = require('uuid');
-const { isValidDate } = require('../../utils/validate');
+const { isValidDate } = require('../utils/validate');
 
 let tareas = [];
 

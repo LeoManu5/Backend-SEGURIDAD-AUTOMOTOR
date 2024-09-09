@@ -1,5 +1,5 @@
 const express = require('express');
-const { createCart, getCartById, addProductToCart } = require('../controllers/cartsController');
+const { createCart, getCartById, addProductToCart } = require('../src/controllers/cartsController');
 const router = express.Router();
 
 // Crear un nuevo carrito
