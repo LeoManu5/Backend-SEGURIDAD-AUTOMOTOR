@@ -1,15 +1,14 @@
 const express = require('express');
-const app = express();
-const PORT = 8080;
+const productsRoutes = require('./routes/products');
+const cartsRoutes = require('./routes/carts');
 
-// Middleware para manejar JSON
+const app = express();
 app.use(express.json());
 
-// Rutas
-const tareaRoutes = require('./routes/tareas');
-app.use('/api/tareas', tareaRoutes);
+app.use('/api/products', productsRoutes);
+app.use('/api/carts', cartsRoutes);
 
-// Iniciar el servidor
+const PORT = 8080;
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
