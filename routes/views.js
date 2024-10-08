@@ -1,14 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const path = require('path');
-const products = require(path.join(__dirname, '../data/products.json')); 
 
+// Ruta para mostrar la vista "home.handlebars"
 router.get('/', (req, res) => {
-  res.render('home', { products });
+  res.render('home'); // Renderiza home.handlebars
 });
 
-router.get('/realtimeproducts', (req, res) => {
-  res.render('realTimeProducts');
-});
+// Otras rutas para views...
 
 module.exports = router;

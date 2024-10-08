@@ -1,27 +1,23 @@
 const express = require('express');
-const { create } = require('express-handlebars');
-const path = require('path');
+const { engine } = require('express-handlebars'); // Importa correctamente
+const productsRoutes = require('./routes/products');
+const cartsRoutes = require('./routes/carts');
 
 const app = express();
-const hbs = create({
-  extname: '.handlebars',
-});
-
-app.engine('.handlebars', hbs.engine);
-app.set('view engine', '.handlebars');
-app.set('views', path.join(__dirname, 'views'));
-
-
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true })); // Para manejar formularios
 
+// Configura Handlebars
+app.engine('handlebars', engine()); // Usa engine() en lugar de exphbs()
+app.set('view engine', 'handlebars');
+app.set('views', './views'); // Asegúrate de que esta carpeta exista
 
-const productsRoutes = require('./routes/products');
-const cartRoutes = require('./routes/carts');
-const viewsRoutes = require('./routes/views'); 
-
+// Rutas
 app.use('/api/products', productsRoutes);
-app.use('/api/carts', cartRoutes);
-app.use('/', viewsRoutes); 
+app.use('/api/carts', cartsRoutes);
 
-module.exports = app;
+// Inicializa el servidor
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
