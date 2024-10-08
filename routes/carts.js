@@ -3,13 +3,11 @@ const router = express.Router();
 const fs = require('fs/promises');
 const path = require('path');
 
-// Helper function to read carts from JSON file
 const readCartsFromFile = async () => {
     const data = await fs.readFile(path.join(__dirname, '../data/carts.json'));
     return JSON.parse(data);
 };
 
-// DELETE /api/carts/:cid/products/:pid
 router.delete('/:cid/products/:pid', async (req, res) => {
     try {
         const { cid, pid } = req.params;
@@ -28,7 +26,7 @@ router.delete('/:cid/products/:pid', async (req, res) => {
     }
 });
 
-// PUT /api/carts/:cid
+
 router.put('/:cid', async (req, res) => {
     try {
         const { cid } = req.params;
@@ -48,7 +46,6 @@ router.put('/:cid', async (req, res) => {
     }
 });
 
-// PUT /api/carts/:cid/products/:pid
 router.put('/:cid/products/:pid', async (req, res) => {
     try {
         const { cid, pid } = req.params;
@@ -72,7 +69,7 @@ router.put('/:cid/products/:pid', async (req, res) => {
     }
 });
 
-// DELETE /api/carts/:cid
+
 router.delete('/:cid', async (req, res) => {
     try {
         const { cid } = req.params;

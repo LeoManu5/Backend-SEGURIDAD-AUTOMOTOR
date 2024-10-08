@@ -3,31 +3,31 @@ const router = express.Router();
 const fs = require('fs/promises');
 const path = require('path');
 
-// Helper function to read products from JSON file
+
 const readProductsFromFile = async () => {
     const data = await fs.readFile(path.join(__dirname, '../data/products.json'));
     return JSON.parse(data);
 };
 
-// GET /api/products
+
 router.get('/', async (req, res) => {
     try {
         const { limit = 10, page = 1, query = '', sort } = req.query;
         const products = await readProductsFromFile();
         
-        // Filter products based on the query parameter
+        
         const filteredProducts = products.filter(product =>
             product.category.includes(query) || product.available.toString() === query
         );
 
-        // Sorting
+        
         if (sort === 'asc') {
             filteredProducts.sort((a, b) => a.price - b.price);
         } else if (sort === 'desc') {
             filteredProducts.sort((a, b) => b.price - a.price);
         }
 
-        // Pagination
+       
         const totalProducts = filteredProducts.length;
         const totalPages = Math.ceil(totalProducts / limit);
         const currentPage = Number(page);
